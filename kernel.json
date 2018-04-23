@@ -1,0 +1,5 @@
+{
+  "argv": ["sage", "-python", "/opt/sage/local/share/jupyter/kernels/m2kernel/m2kernel.py", "-f", "{connection_file}"],
+  "display_name": "Macaulay2",
+  "language": "macaulay2"
+}
