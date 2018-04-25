@@ -8,4 +8,4 @@ JupyterLab is set up with an initial password of `jupyterlab`. As JupyterLab cur
 * `sage -sh` to get a shell in Sage installation's environment
 * `jupyter notebook password` and follow the prompts to change the password
 
-`sage -sh` is very useful, and you can also use it to install plugins in Sage's JupyterLab installation, with `jupyter labextension install ...` (see [JupyterLab docs](https://github.com/jupyterlab/jupyterlab) for more info)
+Many things can be done with the jupyter installation from the `sage -sh` environment, such as installing plugins in Sage's JupyterLab installation with `jupyter labextension install ...` (see [JupyterLab docs](https://github.com/jupyterlab/jupyterlab) for more info)
