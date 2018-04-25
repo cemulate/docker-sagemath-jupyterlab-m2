@@ -1,4 +1,4 @@
-FROM sagemath/sagemath:8.1
+FROM sagemath/sagemath
 
 MAINTAINER Chase Meadors <c.ed.mead@gmail.com>
 
@@ -23,15 +23,22 @@ RUN echo 'deb http://www.math.uiuc.edu/Macaulay2/Repositories/Ubuntu xenial main
 USER sage
 
 # Install python modules in Sage's python
-RUN pwd
+# Also do a pip upgrade on ipywidgets (extensions such as @jupyter-widgets/jupyterlab-manager require at least version 7)
 RUN sage -pip install ipykernel && \
-    sage -pip install jupyterlab
+    sage -pip install jupyterlab && \
+    sage -pip install --upgrade ipywidgets
 
 # Install Macaulay2 kernel
 COPY kernel.json /tmp
-RUN git clone -b patch-1 https://github.com/cemulate/macaulay2-kernel /tmp/macaulay2-kernel && \
+RUN git clone https://github.com/cemulate/macaulay2-kernel /tmp/macaulay2-kernel && \
     mkdir -p /opt/sage/local/share/jupyter/kernels/m2kernel && \
     cp /tmp/macaulay2-kernel/m2kernel/m2kernel.py /opt/sage/local/share/jupyter/kernels/m2kernel/m2kernel.py && \
     cp /tmp/kernel.json /opt/sage/local/share/jupyter/kernels/m2kernel/kernel.json
+
+# Set up a password for jupyterlab
+ARG JUPYTERLAB_PASSWORD=jupyterlab
+COPY setjupyterpassword.py /tmp
+RUN sage -pip install pexpect && \
+    sage -python /tmp/setjupyterpassword.py ${JUPYTERLAB_PASSWORD}
 
 ENTRYPOINT sage -n jupyterlab --no-browser --ip=$(grep `hostname` /etc/hosts | cut -f1) --port=8888
