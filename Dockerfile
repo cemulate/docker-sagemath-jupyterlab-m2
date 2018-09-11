@@ -9,7 +9,7 @@ USER root
 
 # Install Node.js (for installing/configuring jupyterlab plugins)
 RUN apt-get -y update && \
-    apt-get -y install curl && \
+    apt-get -y install curl git && \
     curl --silent --location https://deb.nodesource.com/setup_9.x | sudo bash - && \
     apt-get -y install nodejs && \
     apt-get -y install build-essential
@@ -31,9 +31,9 @@ RUN sage -pip install ipykernel && \
 # Install Macaulay2 kernel
 COPY kernel.json /tmp
 RUN git clone https://github.com/cemulate/macaulay2-kernel /tmp/macaulay2-kernel && \
-    mkdir -p /opt/sage/local/share/jupyter/kernels/m2kernel && \
-    cp /tmp/macaulay2-kernel/m2kernel/m2kernel.py /opt/sage/local/share/jupyter/kernels/m2kernel/m2kernel.py && \
-    cp /tmp/kernel.json /opt/sage/local/share/jupyter/kernels/m2kernel/kernel.json
+    mkdir -p ~/sage/local/share/jupyter/kernels/m2kernel && \
+    cp /tmp/macaulay2-kernel/m2kernel/m2kernel.py ~/sage/local/share/jupyter/kernels/m2kernel/m2kernel.py && \
+    cp /tmp/kernel.json ~/sage/local/share/jupyter/kernels/m2kernel/kernel.json
 
 # Set up a password for jupyterlab
 ARG JUPYTERLAB_PASSWORD=jupyterlab
