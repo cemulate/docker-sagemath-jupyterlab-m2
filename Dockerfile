@@ -41,4 +41,15 @@ COPY setjupyterpassword.py /tmp
 RUN sage -pip install pexpect && \
     sage -python /tmp/setjupyterpassword.py ${JUPYTERLAB_PASSWORD}
 
+# Install Haskell
+RUN curl -sSL https://get.haskellstack.org | sh
+
+# Install IHaskell and its dependencies
+RUN sudo apt-get -y install libtinfo-dev libzmq3-dev libcairo2-dev libpango1.0-dev libmagic-dev libblas-dev liblapack-dev && \
+    git clone https://github.com/gibiansky/IHaskell ~/IHaskell && \
+    cd IHaskell && \
+    mv stack-8.4.yaml stack.yaml && \
+    stack install gtk2hs-buildtools && \
+    stack install --fast
+
 ENTRYPOINT sage -n jupyterlab --no-browser --ip=$(grep `hostname` /etc/hosts | cut -f1) --port=8888
