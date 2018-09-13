@@ -1,6 +1,17 @@
-Sagemath with the newest JupyterLab notebook (a modern successor to Jupyter), including an installation of Macaulay2 and a corresponding Jupyter kernel
+Sagemath with the newest JupyterLab notebook (a modern successor to Jupyter), with optional extras!
+There are three directories and Dockerfiles - each one building upon the previous:
 
-[Repository on DockerHub](https://hub.docker.com/r/cemulate/sagemath-jupyterlab-m2/)
+* `./base` contains the basic image with a full SageMath installation using the JupyterLab notebook.
+
+* `./m2` adds an installation of [Macaulay2](http://www2.macaulay2.com/Macaulay2/), a software system for Commutative Algebra
+
+* Finally, `./m2-ihaskell` adds an installation of Haskell along with the [IHaskell](https://github.com/gibiansky/IHaskell) kernel for JupyterLab.
+
+Builds can be found on DockerHub as:
+
+* [cemulate/sagemath-jupyterlab](https://hub.docker.com/r/cemulate/sagemath-jupyterlab/)
+* [cemulate/sagemath-jupyterlab-m2](https://hub.docker.com/r/cemulate/sagemath-jupyterlab-m2/)
+* [cemulate/sagemath-jupyterlab-m2-ihaskell](https://hub.docker.com/r/cemulate/sagemath-jupyterlab-m2-ihaskell/)
 
 JupyterLab is set up with an initial password of `jupyterlab`. As JupyterLab currently lacks an interface to change the password, you'll have to change this manually:
 
