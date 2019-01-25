@@ -22,6 +22,12 @@ RUN sage -pip install ipykernel && \
     sage -pip install jupyterlab && \
     sage -pip install --upgrade ipywidgets
 
+RUN sage -sh -c "pip3 install ipykernel"
+# This will populate the python3 kernel in the location below:
+
+# But, we need to "fix" it -- the kernel will invoke "python" when it actually needs to invoke "python3" explicitly in sage's environment
+ADD python3_kernel.json /home/sage/sage/local/share/jupyter/kernels/python3/kernel.json
+
 # Set up a password for jupyterlab
 ARG JUPYTERLAB_PASSWORD=jupyterlab
 COPY setjupyterpassword.py /tmp
