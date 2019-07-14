@@ -9,6 +9,10 @@ Builds can be found on DockerHub as:
 * [cemulate/sagemath-jupyterlab](https://hub.docker.com/r/cemulate/sagemath-jupyterlab/)
 * [cemulate/sagemath-jupyterlab-m2](https://hub.docker.com/r/cemulate/sagemath-jupyterlab-m2/)
 
+Dockerfiles can be found in the Github repo at [cemulate/docker-sagemath-jupyterlab-m2](https://github.com/cemulate/docker-sagemath-jupyterlab-m2).
+Release tags on Github correspond to the tags on the two DockerHub images.
+No fancy versioning, images are simply tagged `r0, r1, ...` incrementing every update where `latest` is always the highest revision.
+
 The container's notebook server runs on port `8888`, which must be bound to whatever port you desire.
 It is recommended to bind `/home/sage/Notebooks` to a local directory to ensure that your notebooks are persisted.
 A sample `docker-compose.yml` that could be used to manage this configuration is as simple as follows:
