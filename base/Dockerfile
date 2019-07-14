@@ -1,4 +1,4 @@
-FROM sagemath/sagemath:8.3
+FROM sagemath/sagemath:8.8
 
 MAINTAINER Chase Meadors <c.ed.mead@gmail.com>
 
