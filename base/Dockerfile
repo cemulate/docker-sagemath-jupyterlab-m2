@@ -30,9 +30,8 @@ ADD python3_kernel.json /home/sage/sage/local/share/jupyter/kernels/python3/kern
 
 # Set up a password for jupyterlab
 ARG JUPYTERLAB_PASSWORD=jupyterlab
-COPY setjupyterpassword.py /tmp
 RUN sage -pip install pexpect && \
-    sage -python /tmp/setjupyterpassword.py ${JUPYTERLAB_PASSWORD}
+    sage -sh -c "jupyter notebook --generate-config"
 
 # Make Notebooks directory
 RUN mkdir Notebooks

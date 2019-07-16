@@ -1,4 +1,4 @@
-FROM cemulate/sagemath-jupyterlab:r2
+FROM cemulate/sagemath-jupyterlab:r3
 
 USER root
 

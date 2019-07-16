@@ -32,4 +32,4 @@ Where, of course, the image, external port, and local notebook directy can be ch
 You must use a token to log into the notebook server for the first time.
 This token will be displayed in the container's output, which can be seen in the terminal if run interactively, or retrieved with `docker logs {container_name}`.
 You may set a password during the first login by using the token along with a new password.
-**Note that the container must be restarted for the new password to take effect**.
+**Note that the container must be restarted for the new password to take effect** (if started with `docker-compose up -d`, this can be done with `docker-compose restart`).
