@@ -1,4 +1,4 @@
-FROM sagemath/sagemath:8.8
+FROM sagemath/sagemath:9.0-py3
 
 MAINTAINER Chase Meadors <c.ed.mead@gmail.com>
 
@@ -10,7 +10,7 @@ USER root
 # Install Node.js (for installing/configuring jupyterlab plugins)
 RUN apt-get -y update && \
     apt-get -y install curl git && \
-    curl --silent --location https://deb.nodesource.com/setup_9.x | sudo bash - && \
+    curl --silent --location https://deb.nodesource.com/setup_12.x | sudo bash - && \
     apt-get -y install nodejs && \
     apt-get -y install build-essential
 
@@ -21,12 +21,6 @@ USER sage
 RUN sage -pip install ipykernel && \
     sage -pip install jupyterlab && \
     sage -pip install --upgrade ipywidgets
-
-RUN sage -sh -c "pip3 install ipykernel"
-# This will populate the python3 kernel in the location below:
-
-# But, we need to "fix" it -- the kernel will invoke "python" when it actually needs to invoke "python3" explicitly in sage's environment
-ADD python3_kernel.json /home/sage/sage/local/share/jupyter/kernels/python3/kernel.json
 
 # Set up a password for jupyterlab
 ARG JUPYTERLAB_PASSWORD=jupyterlab
