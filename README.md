@@ -11,7 +11,7 @@ Builds can be found on DockerHub as:
 
 Dockerfiles can be found in the Github repo at [cemulate/docker-sagemath-jupyterlab-m2](https://github.com/cemulate/docker-sagemath-jupyterlab-m2).
 Release tags on Github correspond to the tags on the two DockerHub images.
-No fancy versioning, images are simply tagged `r0, r1, ...` incrementing every update where `latest` is always the highest revision.
+Images are tagged identically to the [sagemath/sagemath] tag that `base` is based-on (as of `9.0-py3`, before that a simple revision count was used).
 
 The container's notebook server runs on port `8888`, which must be bound to whatever port you desire.
 It is recommended to bind `/home/sage/Notebooks` to a local directory to ensure that your notebooks are persisted.
