@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SAGE_VERSION="9.0"
+SAGE_VERSION="9.1"
 
 case "$1" in
     dev) BUILD_DEVELOPMENT="1"; SAGE_IMAGE="sagemath-dev"; IMAGE_POSTFIX="-dev" ;;

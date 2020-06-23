@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SAGE_VERSION="9.0"
+SAGE_VERSION="9.1"
 
 SAGE_TAG="${SAGE_VERSION}-py3"
 
