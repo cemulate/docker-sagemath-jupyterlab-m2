@@ -1,4 +1,4 @@
-FROM cemulate/sagemath-jupyterlab:9.0-py3
+ARG BASE_IMAGE
 
 USER root
 

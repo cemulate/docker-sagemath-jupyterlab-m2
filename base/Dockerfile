@@ -1,8 +1,7 @@
-FROM sagemath/sagemath:9.0-py3
+ARG SAGE_IMAGE
+FROM sagemath/${SAGE_IMAGE}
 
-MAINTAINER Chase Meadors <c.ed.mead@gmail.com>
-
-ARG SAGE_BRANCH=master
+ARG BUILD_DEVELOPMENT
 EXPOSE 8888
 
 USER root
@@ -12,20 +11,16 @@ RUN apt-get -y update && \
     apt-get -y install curl git && \
     curl --silent --location https://deb.nodesource.com/setup_12.x | sudo bash - && \
     apt-get -y install nodejs && \
-    apt-get -y install build-essential
+    if [ -z "$BUILD_DEVELOPMENT" ]; then apt-get -y install build-essential; fi
 
 USER sage
+WORKDIR /home/sage/sage
 
-# Install python modules in Sage's python
-# Also do a pip upgrade on ipywidgets (extensions such as @jupyter-widgets/jupyterlab-manager require at least version 7)
-RUN sage -pip install ipykernel && \
+RUN if [ -n "$BUILD_DEVELOPMENT" ]; then make build; fi && \
     sage -pip install jupyterlab && \
-    sage -pip install --upgrade ipywidgets
-
-# Set up a password for jupyterlab
-ARG JUPYTERLAB_PASSWORD=jupyterlab
-RUN sage -pip install pexpect && \
     sage -sh -c "jupyter notebook --generate-config"
+
+WORKDIR /home/sage
 
 # Make Notebooks directory
 RUN mkdir Notebooks
