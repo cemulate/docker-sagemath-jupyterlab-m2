@@ -3,11 +3,9 @@
 SAGE_VERSION="9.1"
 
 case "$1" in
-    dev) BUILD_DEVELOPMENT="1"; SAGE_IMAGE="sagemath-dev"; IMAGE_POSTFIX="-dev" ;;
-    *) BUILD_DEVELOPMENT=""; SAGE_IMAGE="sagemath"; IMAGE_POSTFIX="" ;;
+    dev) BUILD_DEVELOPMENT="1"; SAGE_IMAGE="sagemath-dev"; SAGE_TAG="develop-py3"; IMAGE_POSTFIX="-dev" ;;
+    *) BUILD_DEVELOPMENT=""; SAGE_IMAGE="sagemath"; SAGE_TAG="${SAGE_VERSION}-py3"; IMAGE_POSTFIX="" ;;
 esac
-
-SAGE_TAG="${SAGE_VERSION}-py3"
 
 TARGET="cemulate/sagemath-jupyterlab${IMAGE_POSTFIX}:${SAGE_TAG}"
 
